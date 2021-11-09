@@ -10,11 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model LogWebhook {
-  id        Int      @id
-  pageId    Int
-  invoiceId Int
-  fieldId   String
-  rawData   String
-  createdAt DateTime
+model LogInvoiceChange {
+  id         Int      @id @default(autoincrement())
+  pageId     Int?
+  invoiceId  Int?
+  fieldId    String?
+  rawData    String?
+  serverTime Int?
+  createdAt  DateTime @default(now())
+}
+
+model LogWebhookPayload {
+  id        Int      @id @default(autoincrement())
+  provider  String?
+  method    String?
+  rawData   String?
+  createdAt DateTime @default(now())
 }
